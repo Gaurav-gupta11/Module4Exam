@@ -1,0 +1,16 @@
+uuid: 77bad187-c286-459c-a8f9-1393412738d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.blog
+  module:
+    - node
+id: guestbloggers
+label: GuestBloggers
+weight: 5
+is_admin: null
+permissions:
+  - 'create blog content'
+  - 'delete own blog content'
+  - 'edit own blog content'

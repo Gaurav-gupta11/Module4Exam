@@ -1,0 +1,13 @@
+uuid: db22556b-09f6-4567-9c87-25c9b1e188a4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: C7X8h9FWlwkQ9y5mnU2JzgaZICAdc6HFbPVbhvjlAYE
+id: node_unpublish_action
+label: 'Unpublish content'
+type: node
+plugin: 'entity:unpublish_action:node'
+configuration: {  }

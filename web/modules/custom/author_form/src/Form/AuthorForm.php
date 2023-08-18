@@ -1,26 +1,21 @@
 <?php
-
 namespace Drupal\author_form\Form;
-
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\user\Entity\User;
 use Drupal\Core\Mail\MailManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
 /**
  * Provides the Author Form.
  */
 class AuthorForm extends FormBase {
-
   /**
    * The mail manager service.
    *
    * @var \Drupal\Core\Mail\MailManagerInterface
    */
   protected $mailManager;
-
   /**
    * Constructs an AuthorForm object.
    *
@@ -30,7 +25,6 @@ class AuthorForm extends FormBase {
   public function __construct(MailManagerInterface $mail_manager) {
     $this->mailManager = $mail_manager;
   }
-
   /**
    * {@inheritdoc}
    */
@@ -46,7 +40,6 @@ class AuthorForm extends FormBase {
   {
     return 'author_form';
   }
-
   /**
    * {@inheritdoc}
    */
@@ -58,19 +51,16 @@ class AuthorForm extends FormBase {
       '#title' => $this->t('Full Name'),
       '#required' => TRUE,
     ];
-
     $form['email'] = [
       '#type' => 'email',
       '#title' => $this->t('Email Address'),
       '#required' => TRUE,
     ];
-
     $form['password'] = [
       '#type' => 'password',
       '#title' => $this->t('Password'),
       '#required' => TRUE,
     ];
-
     $form['role'] = [
       '#type' => 'radios',
       '#title' => $this->t('Role'),
@@ -80,15 +70,12 @@ class AuthorForm extends FormBase {
       ],
       '#required' => TRUE,
     ];
-
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
     ];
-
     return $form;
   }
-
   /**
    * {@inheritdoc}
    */
@@ -99,14 +86,12 @@ class AuthorForm extends FormBase {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $form_state->setErrorByName('email', $this->t('Invalid email address.'));
     }
-
     // Validate role selection.
     $role = $form_state->getValue('role');
     if (!in_array($role, ['bloggers', 'guestbloggers'])) {
       $form_state->setErrorByName('role', $this->t('Invalid role selection.'));
     }
   }
-
   /**
    * {@inheritdoc}
    */
@@ -114,7 +99,6 @@ class AuthorForm extends FormBase {
   {
     // Get form values
     $values = $form_state->getValues();
-
     // Create new user
     $user = User::create();
     $user->setPassword($values['password']);
@@ -124,20 +108,17 @@ class AuthorForm extends FormBase {
     $user->addRole($values['role']);
     $user->block();
     $user->save();
-
    // Send email notification to admin
   $params = [
     'subject' => 'New user registration',
     'body' => 'A new user has submitted the registration form. Please review and approve.',
   ];
   $this->mailManager->mail('author_form', 'notification', 'gaurav.gupta@innoraft.com', LanguageInterface::LANGCODE_DEFAULT, $params, NULL, TRUE);
-
   // Send thank you email to the user
   $params = [
     'subject' => 'Thank you for your submission',
     'body' => 'Thank you for submitting the registration form. We will get back to you soon.',
   ];
   $this->mailManager->mail('author_form', 'notification', $values['email'], LanguageInterface::LANGCODE_DEFAULT, $params, NULL, TRUE);
-    
   }
 }

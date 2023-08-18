@@ -1,0 +1,30 @@
+<?php
+
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+
+/**
+ * Implements hook_install().
+ */
+function custom_like_install()
+{
+  // Check if our field is not already created.
+  if (!FieldStorageConfig::loadByName('node', 'field_like_counts')) {
+    // Create the field storage.
+    FieldStorageConfig::create([
+      'field_name' => 'field_likes',
+      'entity_type' => 'node',
+      'type' => 'integer',
+      'cardinality' => 1,
+    ])->save();
+
+    // Create the instance on the bundle.
+    FieldConfig::create([
+      'field_name' => 'field_likes',
+      'entity_type' => 'node',
+      'bundle' => 'blog',
+      'label' => 'Like count',
+      'description' => 'The number of likes for this blog post.',
+    ])->save();
+  }
+}

@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.blog.body
+    - field.field.node.blog.field_likes
     - field.field.node.blog.field_published_dt
     - field.field.node.blog.field_tags
     - node.type.blog
@@ -27,7 +28,16 @@ content:
       ellipsis: true
       wordsafe: true
     third_party_settings: {  }
-    weight: 101
+    weight: 1
+    region: content
+  field_likes:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 4
     region: content
   field_published_dt:
     type: datetime_default
@@ -36,7 +46,7 @@ content:
       timezone_override: ''
       format_type: medium
     third_party_settings: {  }
-    weight: 102
+    weight: 3
     region: content
   field_tags:
     type: entity_reference_label
@@ -44,11 +54,16 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 103
+    weight: 2
+    region: content
+  flag_like:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden: {  }

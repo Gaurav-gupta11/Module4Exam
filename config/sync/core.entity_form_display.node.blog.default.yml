@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.blog.body
+    - field.field.node.blog.field_likes
     - field.field.node.blog.field_published_dt
     - field.field.node.blog.field_tags
     - node.type.blog
@@ -31,6 +32,13 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_likes:
+    type: number
+    weight: 124
+    region: content
+    settings:
+      placeholder: ''
     third_party_settings: {  }
   field_published_dt:
     type: datetime_default

@@ -1,0 +1,9 @@
+_core:
+  default_config_hash: qVQ1RHKobjP6sdrM7AyswE45vzpPM9ff9JGcyTdOFAQ
+otp_no_of_digits: '6'
+otp_otp_mail_subject: 'Your Requested One Time Password'
+otp_otp_mail_body: 'This email will be send with [user:otp] which will be replaced with otp value'
+user_otp_generate_threshold: '4'
+user_otp_generate_time_window: '3'
+user_otp_submit_threshold: '15'
+user_otp_submit_time_window: '1'

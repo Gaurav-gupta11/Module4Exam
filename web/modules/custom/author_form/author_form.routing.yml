@@ -1,0 +1,15 @@
+author_form:
+  path: "/become-author"
+  defaults:
+    _form: '\Drupal\author_form\Form\AuthorForm'
+    _title: "Become an Author"
+  requirements:
+    _permission: "access content"
+
+author_form.otp_verification_form:
+  path: '/otp-verification'
+  defaults:
+    _form: '\Drupal\author_form\Form\OtpVerificationForm'
+    _title: 'OTP Verification Form'
+  requirements:
+    _permission: 'access content'
